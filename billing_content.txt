@@ -1,0 +1,24 @@
+<?php
+ include("script/conn.php");
+ session_start();
+if(!(isset($_SESSION['username']))&& !(isset($_SESSION['id'])))
+{
+header('location:myaccount.php?confirm=1');
+
+exit();
+}
+$movie_id=$price="";
+$id=$_GET['book'];
+$sql="SELECT * FROM MOVIES WHERE movie_id=$id LIMIT 1";
+$result=mysqli_query($con,$sql);
+if(mysqli_num_rows($result)>0)
+{
+while($row = mysqli_fetch_assoc($result))
+{
+$movie_id=$row['movie_id'];
+$name=$row['name'];
+
+$price=$row['price'];
+}
+}
+?>
